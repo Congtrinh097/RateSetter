@@ -7,33 +7,32 @@ namespace RateSetter
 {
     class Program
     {
-        static void Main(string[] args)
-        {
-            //fake data from database
-            List<User> existingUserList = new List<User>(){
+        //fake data from database
+        static List<User> existingUserList = new List<User>(){
                 new User() {
-                    Address = new Address(){ Latitude = 102.3M, Longitude = 12.23M, State="Da Nang",StreetAddress="3 Nguyen Thi Minh Khai", Suburb="ABC city !"},
+                    Address = new Address(){ Latitude = 19.3798091M, Longitude = 109.2164128M, State="Da Nang",StreetAddress="3 Nguyen Thi Minh Khai", Suburb="ABC city !"},
                     Name = "Chris",
                     ReferralCode = "ABC123" },
                 new User() {
-                    Address = new Address(){ Latitude = 10.3M, Longitude = 12.23M, State="Da Nang",StreetAddress="Van Cao-", Suburb="ABC city !"},
+                    Address = new Address(){ Latitude = 16.3798091M, Longitude = 108.2164128M, State="Da Nang",StreetAddress="Van Cao-", Suburb="ABC city !"},
                     Name = "Trinh",
                     ReferralCode = "HKT123" },
                 new User() {
-                    Address = new Address(){ Latitude = 10.3M, Longitude = 12.23M, State="Da Nang",StreetAddress="Van Cao", Suburb="Data test city !"},
+                    Address = new Address(){ Latitude = 19.3798091M, Longitude = 107.2164128M, State="Da Nang",StreetAddress="Van Cao", Suburb="Data test city !"},
                     Name = "Lan",
                     ReferralCode = "DMC123" },
                 new User() {
-                    Address = new Address(){ Latitude = 10.3M, Longitude = 12.23M, State="Da Nang",StreetAddress="Van Cao -", Suburb="ABC city !"},
+                    Address = new Address(){ Latitude = 19.4798091M, Longitude = 137.2164128M, State="Da Nang",StreetAddress="Van Cao -", Suburb="ABC city !"},
                     Name = "John Joe",
                     ReferralCode = "IIS123" },
-            };
+        };
 
-            //fake input user info
+        static void Main(string[] args)
+        {
             // match distance
             User newUser1 = new User()
             {
-                Address = new Address() { Latitude = 102.131213M, Longitude = 9.233M, State = "Da Nang ", StreetAddress = "df3 T Thi Minh Khai", Suburb = "ABC city !" },
+                Address = new Address() { Latitude = 19.3798091M, Longitude = 107.2164128M, State = "Da Nang ", StreetAddress = "df3 T Thi Minh Khai", Suburb = "ABC city !" },
                 Name = "Chris",
                 ReferralCode = "KLD543"
             };
@@ -61,30 +60,30 @@ namespace RateSetter
                 ReferralCode = "NO1T23"
             };
 
-            // user matcher Logic
-            IUserMatcher userMatch = new UserMatcher();
+            
 
             // check data if it's matches with existing user by the rules defined.
             // test 1
-            Console.WriteLine("Test user 1: !");
-            if ( existingUserList.Find(user => userMatch.IsMatch(newUser1, user)) != null) {
+            Console.WriteLine("Check user 1:");
+            if (IsExisting(newUser1))
+            {  
                 Console.WriteLine("rejected");
             } else {
                 Console.WriteLine("it's good");
             }
             // test 2
-            Console.WriteLine("Test user 2: !");
-            if (existingUserList.Find(user => userMatch.IsMatch(newUser2, user)) != null)
+            Console.WriteLine("Check user 2:");
+            if (IsExisting(newUser2))
             {
-                Console.WriteLine("rejected");
+                Console.WriteLine("rejected"); 
             }
             else
             {
                 Console.WriteLine("it's good");
             }
             // test 3
-            Console.WriteLine("Test user 3: !");
-            if (existingUserList.Find(user => userMatch.IsMatch(newUser3, user)) != null)
+            Console.WriteLine("Check user 3:");
+            if (IsExisting(newUser3))
             {
                 Console.WriteLine("rejected");
             }
@@ -93,8 +92,8 @@ namespace RateSetter
                 Console.WriteLine("it's good");
             }
             // test 4
-            Console.WriteLine("Test user 4: !");
-            if (existingUserList.Find(user => userMatch.IsMatch(newUser4, user)) != null)
+            Console.WriteLine("Check user 4:");
+            if (IsExisting(newUser4))
             {
                 Console.WriteLine("rejected");
             }
@@ -105,6 +104,20 @@ namespace RateSetter
 
             Console.WriteLine("End the function!");
             Console.ReadLine();
+        }
+
+        public static bool IsExisting(User newUser)
+        {
+            IUserMatcher userMatch = new UserMatcher();
+
+            if (existingUserList.Find(user => userMatch.IsMatch(newUser, user)) != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }
