@@ -10,7 +10,7 @@ namespace RateSetter.Logics
     {
         public bool IsMatch(User newUser, User existingUser)
         {
-            var dis = LocationHelper.GetDistance(newUser.Address.Latitude, newUser.Address.Longitude, existingUser.Address.Latitude, existingUser.Address.Longitude, 'M');
+            var dis = LocationHelper.GetDistance(newUser.Address.Latitude, newUser.Address.Longitude, existingUser.Address.Latitude, existingUser.Address.Longitude);
             return dis <= 500;
         }
     }

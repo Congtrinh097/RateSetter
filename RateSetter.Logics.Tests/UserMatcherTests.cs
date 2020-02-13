@@ -62,7 +62,7 @@ namespace RateSetter.Logics.Tests
             };
             User user2 = new User()
             {
-                Address = new Address() { Latitude = 16.3798091M, Longitude = 108.2164128M, State = "Da Nang", StreetAddress = "NoMatch Street", Suburb = "No city " },
+                Address = new Address() { Latitude = 16.4808091M, Longitude = 108.2164128M, State = "Da Nang", StreetAddress = "NoMatch Street", Suburb = "No city " },
                 Name = "Name 1",
                 ReferralCode = "NO1T23"
             };
