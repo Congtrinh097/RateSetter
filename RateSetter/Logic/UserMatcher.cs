@@ -8,14 +8,15 @@ namespace RateSetter.Logics
 {
     public class UserMatcher : IUserMatcher
     {
+        List<IUserRuleMatcher> listRules = new List<IUserRuleMatcher>();
+
+        public void AddRule(IUserRuleMatcher rule)
+        {
+            listRules.Add(rule);
+        }
+
         public bool IsMatch(User newUser, User existingUser)
         {
-            List<IUserRuleMatcher> listRules = new List<IUserRuleMatcher>();
-            // add all rules
-            listRules.Add(new DistanceMatcher());
-            listRules.Add(new NameAddressMatcher());
-            listRules.Add(new ReferralCodeMatcher());
-
             // check all rules if have more than one is matched return it's matched
             if (listRules.Find(rule => rule.IsMatch(newUser, existingUser)) != null) {
                 return true;

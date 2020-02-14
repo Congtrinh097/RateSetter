@@ -8,5 +8,6 @@ namespace RateSetter.Logics
     public interface IUserMatcher
     {
         bool IsMatch(User newUser, User existingUser);
+        void AddRule(IUserRuleMatcher rule);
     }
 }

@@ -10,8 +10,10 @@ namespace RateSetter.Logics
     {
         public bool IsMatch(User newUser, User existingUser)
         {
-            //About this rule. I'm not clearly about the buggy
-            if (!newUser.ReferralCode.ToUpper().Equals(existingUser.ReferralCode.ToUpper()))
+            string sortedRefCodeOfNewUser = StringHelper.SortCharacters(newUser.ReferralCode.ToUpper());
+            string sortedRefCodeExistingUser = StringHelper.SortCharacters(existingUser.ReferralCode.ToUpper());
+
+            if (!sortedRefCodeOfNewUser.Equals(sortedRefCodeExistingUser))
             {
                 return false;
             }

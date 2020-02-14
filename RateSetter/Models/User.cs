@@ -9,4 +9,3 @@ namespace RateSetter.Models
         public string ReferralCode { get; set; }
     }
 }
-

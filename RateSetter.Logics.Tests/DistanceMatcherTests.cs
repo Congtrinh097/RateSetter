@@ -53,7 +53,7 @@ namespace RateSetter.Logics.Tests
         }
 
         [Test]
-        public void TestCase_NotMatched_DistanceMoreThan500()
+        public void TestCase_NoMatched_DistanceMoreThan500()
         {
             User user1 = new User()
             {

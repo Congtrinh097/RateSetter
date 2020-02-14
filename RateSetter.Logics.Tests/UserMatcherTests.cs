@@ -11,6 +11,10 @@ namespace RateSetter.Logics.Tests
         public void Setup()
         {
             userMatcher = new UserMatcher();
+            // add all rules
+            userMatcher.AddRule(new DistanceMatcher());
+            userMatcher.AddRule(new NameAddressMatcher());
+            userMatcher.AddRule(new ReferralCodeMatcher());
         }
 
         [Test]

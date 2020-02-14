@@ -52,15 +52,21 @@ namespace RateSetter
                 ReferralCode = "HKT123"
             };
 
-            // no match
+            // match with ReferralCode be reversed
             User newUser4 = new User()
+            {
+                Address = new Address() { Latitude = 1.3M, Longitude = 022.23M, State = "Da Nang", StreetAddress = "NoMatch Street-", Suburb = "No city " },
+                Name = "NoMatch",
+                ReferralCode = "H12KT3"
+            };
+
+            // no match
+            User newUser5 = new User()
             {
                 Address = new Address() { Latitude = 1.3M, Longitude = 022.23M, State = "Da Nang", StreetAddress = "NoMatch Street-", Suburb = "No city " },
                 Name = "NoMatch",
                 ReferralCode = "NO1T23"
             };
-
-            
 
             // check data if it's matches with existing user by the rules defined.
             // test 1
@@ -106,11 +112,22 @@ namespace RateSetter
             Console.ReadLine();
         }
 
+        /// <summary>
+        /// Check if an user is existing with some rule.
+        /// </summary>
+        /// <param name="newUser"></param>
+        /// <returns></returns>
         public static bool IsExisting(User newUser)
         {
-            IUserMatcher userMatch = new UserMatcher();
+            // new instant of user matcher
+            IUserMatcher userMatcher = new UserMatcher();
 
-            if (existingUserList.Find(user => userMatch.IsMatch(newUser, user)) != null)
+            // add all rules for user matcher
+            userMatcher.AddRule(new DistanceMatcher());
+            userMatcher.AddRule(new NameAddressMatcher());
+            userMatcher.AddRule(new ReferralCodeMatcher());
+
+            if (existingUserList.Find(user => userMatcher.IsMatch(newUser, user)) != null)
             {
                 return true;
             }
