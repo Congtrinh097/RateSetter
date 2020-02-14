@@ -7,8 +7,12 @@ namespace RateSetter
 {
     class Program
     {
-        //fake data from database
-        static List<User> existingUserList = new List<User>(){
+        static List<User> existingUserList;
+
+        static void initialData()
+        {
+            //fake data from database
+            existingUserList = new List<User>(){
                 new User() {
                     Address = new Address(){ Latitude = 19.3798091M, Longitude = 109.2164128M, State="Da Nang",StreetAddress="3 Nguyen Thi Minh Khai", Suburb="ABC city !"},
                     Name = "Chris",
@@ -25,10 +29,13 @@ namespace RateSetter
                     Address = new Address(){ Latitude = 19.4798091M, Longitude = 137.2164128M, State="Da Nang",StreetAddress="Van Cao -", Suburb="ABC city !"},
                     Name = "John Joe",
                     ReferralCode = "IIS123" },
-        };
+            };
+        }
 
         static void Main(string[] args)
         {
+            initialData();
+
             // match distance
             User newUser1 = new User()
             {
@@ -44,7 +51,7 @@ namespace RateSetter
                 ReferralCode = "NOT100"
             };
 
-            // match name ReferralCode
+            // match ReferralCode
             User newUser3 = new User()
             {
                 Address = new Address() { Latitude = 11100.3M, Longitude = 022.23M, State = "Da Nang", StreetAddress = "NoName NoName-", Suburb = "ABC city " },
@@ -72,16 +79,18 @@ namespace RateSetter
             // test 1
             Console.WriteLine("Check user 1:");
             if (IsExisting(newUser1))
-            {  
+            {
                 Console.WriteLine("rejected");
-            } else {
+            }
+            else
+            {
                 Console.WriteLine("it's good");
             }
             // test 2
             Console.WriteLine("Check user 2:");
             if (IsExisting(newUser2))
             {
-                Console.WriteLine("rejected"); 
+                Console.WriteLine("rejected");
             }
             else
             {
@@ -100,6 +109,17 @@ namespace RateSetter
             // test 4
             Console.WriteLine("Check user 4:");
             if (IsExisting(newUser4))
+            {
+                Console.WriteLine("rejected");
+            }
+            else
+            {
+                Console.WriteLine("it's good");
+            }
+
+            // test 5
+            Console.WriteLine("Check user 5:");
+            if (IsExisting(newUser5))
             {
                 Console.WriteLine("rejected");
             }
