@@ -27,5 +27,24 @@ namespace RateSetter.Helpers
         {
             return String.Concat(str.OrderBy(c => c));
         }
+
+        /// <summary>
+        /// get numbers deferent characters 
+        /// </summary>
+        /// <param name="str1"></param>
+        /// <param name="str2"></param>
+        /// <returns></returns>
+        public static int GetNumberOfDifferentCharacters(string str1, string str2)
+        {
+            int count = 0;
+            for (int index = 0; index < str1.Length; index++)
+            {
+                if (str1[index] != str2[index])
+                {
+                     count++;
+                }
+            }
+            return count;
+        }
     }
 }

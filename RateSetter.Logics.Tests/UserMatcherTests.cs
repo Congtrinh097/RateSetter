@@ -185,7 +185,7 @@ namespace RateSetter.Logics.Tests
                 ReferralCode = "HKT123"
             };
 
-            Assert.AreEqual(true, userMatcher.IsMatch(user1, user2));
+            Assert.AreEqual(false, userMatcher.IsMatch(user1, user2));
         }
 
         [Test]
